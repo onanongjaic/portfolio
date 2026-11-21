@@ -138,5 +138,18 @@ a{color:#0B1220}a:hover{color:#374151}
   </footer>
 </div>
 
+<script>
+(function(){var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)');
+document.querySelectorAll('video[autoplay]').forEach(function(v){
+  if(reduce&&reduce.matches){v.removeAttribute('autoplay');v.pause();v.controls=true;return;}
+  var inLink=v.closest('a');
+  if(inLink)return;
+  v.style.cursor='pointer';v.tabIndex=0;v.setAttribute('role','button');
+  v.setAttribute('aria-pressed','false');v.title='Click to pause';
+  function toggle(){if(v.paused){v.play();v.title='Click to pause';v.setAttribute('aria-pressed','false');}else{v.pause();v.title='Click to play';v.setAttribute('aria-pressed','true');}}
+  v.addEventListener('click',toggle);
+  v.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();toggle();}});
+});})();
+</script>
 </body>
 </html>
